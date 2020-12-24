@@ -3,6 +3,7 @@ package entity
 import "time"
 
 // Book represents Books table from database
+// It needs to be here because user entity have has many relation to this books
 type Book struct {
 	ID          uint64    `gorm:"primary_key:auto_increment" json:"id"`
 	Title       string    `gorm:"type:varchar(100)" json:"title" binding:"min:1;max=100"`
