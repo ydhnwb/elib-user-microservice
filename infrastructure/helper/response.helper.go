@@ -9,7 +9,6 @@ import (
 
 //Response is used for static shape json return
 type Response struct {
-	Status  bool        `json:"status"`
 	Message string      `json:"message"`
 	Errors  interface{} `json:"errors"`
 	Data    interface{} `json:"data"`
@@ -22,7 +21,7 @@ type EmptyObj struct{}
 func BuildResponse(statusCode int, data interface{}, ctx *gin.Context) {
 	res := Response{
 		Message: messageMapper(statusCode),
-		Errors:  nil,
+		Errors:  []string{},
 		Data:    data,
 	}
 	ctx.JSON(statusCode, res)
@@ -56,10 +55,12 @@ func messageMapper(statusCode int) string {
 		return "OK!"
 	case 201:
 		return "Created!"
+	case 400:
+		return "Bad request. Cannot process your request"
 	case 404:
 		return "The given data / url not found!"
 	case 401:
-		return "You are not logged in! Please log in first."
+		return "Unauthorized."
 	case 403:
 		return "You dont have permission to do this request!"
 	case 409:

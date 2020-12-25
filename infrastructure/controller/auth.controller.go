@@ -38,7 +38,7 @@ func (ctl *authController) Login(ctx *gin.Context) {
 		return
 	}
 
-	res := ctl.authService.VerifyCredential(loginDTO.Email, loginDTO.Email)
+	res := ctl.authService.VerifyCredential(loginDTO.Email, loginDTO.Password)
 	if v, ok := res.(entity.User); ok {
 		token := ctl.jwtService.GenerateToken(strconv.FormatUint(v.ID, 10))
 		v.Token = token

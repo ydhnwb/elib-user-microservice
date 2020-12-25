@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/ydhnwb/elib-user-microservice/domain/entity"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -29,6 +30,7 @@ func SetupDatabaseConnection() *gorm.DB {
 		panic("Cannot connect to database!")
 	}
 	println("Db is connected!")
+	db.AutoMigrate(&entity.User{})
 	return db
 }
 
