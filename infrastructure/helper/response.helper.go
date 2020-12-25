@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"net/http"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -36,6 +37,17 @@ func BuildErrorResponse(statusCode int, err string, data interface{}, ctx *gin.C
 		Data:    data,
 	}
 	ctx.AbortWithStatusJSON(statusCode, res)
+}
+
+//NoTokenResponse return a json with 400 Bad request because user doesnt provide
+//Authorization in header
+func NoTokenResponse(ctx *gin.Context) {
+	res := Response{
+		Message: "No token provided",
+		Errors:  "No token found in header",
+		Data:    nil,
+	}
+	ctx.AbortWithStatusJSON(http.StatusBadRequest, res)
 }
 
 func messageMapper(statusCode int) string {

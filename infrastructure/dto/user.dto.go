@@ -19,6 +19,7 @@ type UserLoginDTO struct {
 
 //UserUpdateDTO is a structure when user needs to update their own profile
 type UserUpdateDTO struct {
+	ID       uint64 `form:"id" json:"id"`
 	Name     string `form:"name" json:"name,omitempty"`
 	Email    string `form:"email" json:"email,omitempty"`
 	Password string `form:"password" json:"password,omitempty"`
